@@ -11,3 +11,24 @@ This repository contains a slight modification to the original [AmbiK repository
 - 📁`notebooks/lm-test.ipynb` - notebook that I used to see what different uncertainty estimation methods from [LM-polygraph framework](https://github.com/IINemo/lm-polygraph) would return for different open-source models.
 
 ## How to use
+
+Project requires files from all mentioned above repositories:
+
+```python
+!git clone -q "https://github.com/sn0rkmaiden/lm-polygraph.git"
+!git clone -q "https://github.com/sn0rkmaiden/AmbiK-dataset.git"
+!git clone -q "https://github.com/sn0rkmaiden/methods_of_uncertainty_detection.git"
+```
+
+Main methods for running LLM models are `KnowNoPipeline.run()` and `KnowNoPipeline.run_batch()`:
+
+```python
+options, logits, answers, right_answers, gen_scores, ans_scores = knowno.run_batch(option_prompts, tasks_for_ans)
+```
+Example output for `estimator=MaximumSequenceProbability()`:
+- options: `{'A': 'A) use the bread knife to cut the vegetables into small pieces', 'B': 'B) use the paring knife to cut the vegetables into small pieces', 'C': 'do nothing', 'D': 'do nothing'}`
+- answers: `['A', 'B']`
+- right_answers: `['A) use the bread knife to cut the vegetables into small pieces', 'B) use the paring knife to cut the vegetables into small pieces']`
+- ans_scores: `[17.31479]`
+
+A detailed example can be found in `notebooks/baseline-example.ipynb`.

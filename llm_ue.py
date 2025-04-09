@@ -39,14 +39,14 @@ def temperature_scaling(logits, temperature=1):
     return smx
 
 class LLModel():
-    def __init__(self, model_name, model, tokenizer, estimator):
+    def __init__(self, model_name, model, tokenizer, estimator, model_adapter):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         self.model = model
         self.model_name = model_name
         self.tokenizer = tokenizer
         self.generation_config = GenerationConfig.from_pretrained(self.model_name)
-        self.model_adapter = WhiteboxModelBasic(self.model, self.tokenizer, {})
+        self.model_adapter = model_adapter
         self.estimator = estimator
         self.n_alternatives = 10
 

@@ -1,6 +1,3 @@
-examples_generation = "\n".join(open("./prompts/generation.txt", encoding="utf-8").readlines())
-answer_generation ="\n".join(open("./prompts/choising.txt", encoding="utf-8").readlines())
-
 class KnowNoPipeline():
     def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, config=None):        
         self.config = config
@@ -13,10 +10,12 @@ class KnowNoPipeline():
         self.title_prompt = title_prompt
         self.title_answer = title_answer
         self.estimator = estimator
+        self.examples_generation = "\n".join(open("./prompts/generation.txt", encoding="utf-8").readlines())
+        self.answer_generation ="\n".join(open("./prompts/choising.txt", encoding="utf-8").readlines())
 
     def options_prompt(self, description, task, prefix, action):
         #creating prompt for generating options (base prompt is taken from knowno/prompts/generation.txt)
-        prompt = examples_generation.replace('<DESCRIPTION>', description)
+        prompt = self.examples_generation.replace('<DESCRIPTION>', description)
         prompt = prompt.replace('<TASK>', task)
         prompt = prompt.replace('<PREFIX>', prefix)
         prompt = prompt.replace('<ACT>', action)

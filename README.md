@@ -35,7 +35,7 @@ A detailed example can be found in `notebooks/baseline-example.ipynb`.
 
 ## Metrics and results
 
-Next metrics were calculated during experiments (more details in the [paper](file:///C:/Users/%D0%90%D0%BB%D0%B8%D1%81%D0%B0/Desktop/MIPT-internship/papers-to-read/AmbiK_dataset.pdf)):
+Next metrics were calculated during experiments (more details in the [paper](https://disk.yandex.ru/i/tUX9jQbRZyIGsg)):
 - Success rate (SR) 
 - Help rate (HR)
 - Correct help rate (CHR)

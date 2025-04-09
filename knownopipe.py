@@ -1,4 +1,5 @@
 import tqdm
+import gc
 from methods_of_uncertainty_detection.llm_ue import LLModel
 
 class KnowNoPipeline():

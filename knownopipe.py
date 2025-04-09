@@ -10,8 +10,8 @@ class KnowNoPipeline():
         self.title_prompt = title_prompt
         self.title_answer = title_answer
         self.estimator = estimator
-        self.examples_generation = "\n".join(open("./prompts/generation.txt", encoding="utf-8").readlines())
-        self.answer_generation ="\n".join(open("./prompts/choising.txt", encoding="utf-8").readlines())
+        self.examples_generation = "\n".join(open("methods_of_uncertainty_detection/prompts/generation.txt", encoding="utf-8").readlines())
+        self.answer_generation ="\n".join(open("methods_of_uncertainty_detection/prompts/generation.txt", encoding="utf-8").readlines())
 
     def options_prompt(self, description, task, prefix, action):
         #creating prompt for generating options (base prompt is taken from knowno/prompts/generation.txt)

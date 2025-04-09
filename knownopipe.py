@@ -55,7 +55,7 @@ class KnowNoPipeline():
 
     def format_options(self, prompt, options):
         examples = options.replace(prompt, "")
-        options, options_str = format_examples(examples)
+        options, options_str = self.format_examples(examples)
         return options
 
     def predict_examples(self, description, task, prefix, action):

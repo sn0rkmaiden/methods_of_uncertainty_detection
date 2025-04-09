@@ -24,11 +24,6 @@ class KnowNoPipeline():
         prompt = prompt.replace('<PREFIX>', prefix)
         prompt = prompt.replace('<ACT>', action)
         return prompt
-
-    def format_options(self, prompt, options):
-        examples = options.replace(prompt, "")
-        options, options_str = format_examples(examples)
-        return options
         
     def format_examples(self, examples):
         #checking whether the answer prompt is in the correct format: A) <option A>\nB) <option B> ... D) <option D>. If something is wrong, replacing the variant with 'do nothing'
@@ -57,6 +52,11 @@ class KnowNoPipeline():
                 options += 'do nothing' +"\n"
                 variants[key] = 'do nothing'
         return variants, options
+
+    def format_options(self, prompt, options):
+        examples = options.replace(prompt, "")
+        options, options_str = format_examples(examples)
+        return options
 
     def predict_examples(self, description, task, prefix, action):
         llm = LLModel(self.title_prompt, self.model_prompt, self.tokenizer_prompt, self.estimator, self.adapter_prompt)

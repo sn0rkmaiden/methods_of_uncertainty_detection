@@ -1,3 +1,6 @@
+examples_generation = "\n".join(open("./prompts/generation.txt", encoding="utf-8").readlines())
+answer_generation ="\n".join(open("./prompts/choising.txt", encoding="utf-8").readlines())
+
 class KnowNoPipeline():
     def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, config=None):        
         self.config = config

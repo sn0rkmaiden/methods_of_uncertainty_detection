@@ -1,5 +1,7 @@
+from methods_of_uncertainty_detection.llm_ue import LLModel
+
 class KnowNoPipeline():
-    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, config=None):        
+    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, examples_generation, config=None):        
         self.config = config
         self.cp = cpvalue #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma
         self.mapping_1 = ['A', 'B', 'C', 'D']
@@ -10,8 +12,7 @@ class KnowNoPipeline():
         self.title_prompt = title_prompt
         self.title_answer = title_answer
         self.estimator = estimator
-        self.examples_generation = "\n".join(open("methods_of_uncertainty_detection/prompts/generation.txt", encoding="utf-8").readlines())
-        self.answer_generation ="\n".join(open("methods_of_uncertainty_detection/prompts/generation.txt", encoding="utf-8").readlines())
+        self.examples_generation = examples_generation        
 
     def options_prompt(self, description, task, prefix, action):
         #creating prompt for generating options (base prompt is taken from knowno/prompts/generation.txt)

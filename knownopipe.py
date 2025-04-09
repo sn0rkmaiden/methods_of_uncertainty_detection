@@ -1,7 +1,7 @@
 from methods_of_uncertainty_detection.llm_ue import LLModel
 
 class KnowNoPipeline():
-    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, examples, config=None):        
+    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, examples, adapter_prompt, adapter_ans, config=None):        
         self.config = config
         self.cp = cpvalue #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma
         self.mapping_1 = ['A', 'B', 'C', 'D']
@@ -12,7 +12,9 @@ class KnowNoPipeline():
         self.title_prompt = title_prompt
         self.title_answer = title_answer
         self.estimator = estimator
-        self.examples_generation = examples     
+        self.examples_generation = examples    
+        self.adapter_prompt = adapter_prompt
+        self.adapter_ans = adapter_ans
 
     def options_prompt(self, description, task, prefix, action):
         #creating prompt for generating options (base prompt is taken from knowno/prompts/generation.txt)
@@ -28,7 +30,7 @@ class KnowNoPipeline():
         return options
 
     def predict_examples(self, description, task, prefix, action):
-        llm = LLModel(self.title_prompt, self.model_prompt, self.tokenizer_prompt, self.estimator)
+        llm = LLModel(self.title_prompt, self.model_prompt, self.tokenizer_prompt, self.estimator, self.adapter_prompt)
         prompt = self.options_prompt(description, task, prefix, action)
         options, ue_score = llm.generate(prompt)
         llm = None
@@ -36,7 +38,7 @@ class KnowNoPipeline():
         return self.format_options(prompt, options), ue_score
 
     def predict_examples_batch(self, prompts, batch_size=2): #generate examples for batch
-        llm = LLModel(self.title_prompt, self.model_prompt, self.tokenizer_prompt, self.estimator)
+        llm = LLModel(self.title_prompt, self.model_prompt, self.tokenizer_prompt, self.estimator, self.adapter_prompt)
         options_full = []
         scores_full = []
         for i in tqdm.tqdm(range(0, len(prompts), batch_size)):
@@ -93,7 +95,7 @@ class KnowNoPipeline():
         return prompt
 
     def generate_answer_batch(self, prompts, batch_size=1): #choosing CP set for batch
-        llm = LLModel(self.title_answer, self.model_answer, self.tokenizer_answer, self.estimator)
+        llm = LLModel(self.title_answer, self.model_answer, self.tokenizer_answer, self.estimator, self.adapter_ans)
         full_texts = []
         full_logits = []
         full_scores = []
@@ -116,7 +118,7 @@ class KnowNoPipeline():
         return filtered_logits_batch, answers, full_scores
 
     def generate_answer(self, prompt, description, task, prefix, action): #choosing CP set for single example
-        llm = LLModel(self.title_answer, self.model_answer, self.tokenizer_answer, self.estimator)
+        llm = LLModel(self.title_answer, self.model_answer, self.tokenizer_answer, self.estimator, self.adapter_ans)
 
         prompt = self.answer_prompt(prompt, description, task, prefix, action)
         text, logits, ue_score = llm.generate(prompt, return_logits=True)

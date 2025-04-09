@@ -12,7 +12,7 @@ This repository contains a slight modification to the original [AmbiK repository
 
 ## How to use
 
-Project requires files from all mentioned above repositories:
+Project requires files from all mentioned above repositories (I had to modify some files in them so I use forks here):
 
 ```python
 !git clone -q "https://github.com/sn0rkmaiden/lm-polygraph.git"

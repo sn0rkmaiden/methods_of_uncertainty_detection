@@ -1,4 +1,4 @@
-class KnowNoPipe():
+class KnowNoPipeline():
     def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, config=None):        
         self.config = config
         self.cp = cpvalue #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma

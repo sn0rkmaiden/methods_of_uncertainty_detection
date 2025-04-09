@@ -1,7 +1,7 @@
 class KnowNoPipe():
-    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, CP, config=None):        
+    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cp_value, config=None):        
         self.config = config
-        self.cp = CP #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma
+        self.cp = cp_value #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma
         self.mapping_1 = ['A', 'B', 'C', 'D']
         self.model_prompt = model_prompt
         self.model_answer = model_answer

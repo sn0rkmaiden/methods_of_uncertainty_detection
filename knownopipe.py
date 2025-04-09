@@ -3,7 +3,7 @@ import gc
 from methods_of_uncertainty_detection.llm_ue import LLModel
 
 class KnowNoPipeline():
-    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, examples, adapter_prompt, adapter_ans, config=None):        
+    def __init__(self, title_prompt, title_answer, model_prompt, model_answer, tokenizer_prompt, tokenizer_answer, estimator, cpvalue, examples, answer_examples, adapter_prompt, adapter_ans, config=None):        
         self.config = config
         self.cp = cpvalue #You can use calibrate.py to recalculate 0.9 - llama 0.7 gemma
         self.mapping_1 = ['A', 'B', 'C', 'D']
@@ -14,7 +14,8 @@ class KnowNoPipeline():
         self.title_prompt = title_prompt
         self.title_answer = title_answer
         self.estimator = estimator
-        self.examples_generation = examples    
+        self.examples_generation = examples 
+        self.answer_generation = answer_examples
         self.adapter_prompt = adapter_prompt
         self.adapter_ans = adapter_ans
 
@@ -117,7 +118,7 @@ class KnowNoPipeline():
             prompt += ') '
             prompt += value[3:]
             prompt += '\n'
-        prompt = answer_generation.replace('<OPTIONS>', prompt)
+        prompt = self.answer_generation.replace('<OPTIONS>', prompt)
         prompt = prompt.replace('<TASK>', task)
         prompt = prompt.replace('<PREFIX>', prefix)
         prompt = prompt.replace('<ACT>', action)

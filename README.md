@@ -35,10 +35,12 @@ A detailed example can be found in `notebooks/baseline-example.ipynb`.
 
 ### Metrics and results
 
-Next metrics were calculated during experiments:
+Next metrics were calculated during experiments (more details in the [paper](file:///C:/Users/%D0%90%D0%BB%D0%B8%D1%81%D0%B0/Desktop/MIPT-internship/papers-to-read/AmbiK_dataset.pdf)):
 - Success rate (SR) 
 - Help rate (HR)
 - Correct help rate (CHR)
 - Set size correctness (SSC)
 
 I tried to use these models for prompt and answer generation: `google/gemma-2b`, `microsoft/phi-2`, `google/flan-t5-base` and some smaller others. According to subjective assessment and metric scores, `google/gemma-2b` performed best. For future work it would be interesting to try bigger models.
+
+[Link](https://wandb.ai/snork_maiden-_/my-knowno-project?nw=nwusersnork_maiden) to my experiments (a few of those that I managed to run).

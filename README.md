@@ -32,3 +32,13 @@ Example output for `estimator=MaximumSequenceProbability()`:
 - ans_scores: `[17.31479]`
 
 A detailed example can be found in `notebooks/baseline-example.ipynb`.
+
+### Metrics and results
+
+Next metrics were calculated during experiments:
+- Success rate (SR) 
+- Help rate (HR)
+- Correct help rate (CHR)
+- Set size correctness (SSC)
+
+I tried to use these models for prompt and answer generation: `google/gemma-2b`, `microsoft/phi-2`, `google/flan-t5-base` and some smaller others. According to subjective assessment and metric scores, `google/gemma-2b` performed best. For future work it would be interesting to try bigger models.
